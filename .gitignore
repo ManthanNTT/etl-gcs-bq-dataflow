@@ -1,0 +1,3 @@
+etlPipeline/__pycache__/*
+etl_gcs_bq.egg-info/*
+dist/*
