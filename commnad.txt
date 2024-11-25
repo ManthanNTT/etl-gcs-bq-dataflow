@@ -21,6 +21,7 @@ python main.py \
 
 C&I
 python main.py \
+--region asia-northeast1 \
 --runner DirectRunner \
 --job_name ETL-Pipeline-GCS-BQ
 --bucket ci-dev-configurations-asia-northeast1 \
@@ -30,7 +31,21 @@ python main.py \
 D&I
 python main.py \
 --runner DirectRunner \
---job_name ETL-Pipeline-GCS-BQ
+--job_name ETL-Pipeline-GCS-BQ \
+--bucket bkt-df-metadata-01 \
+--envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
+--dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/pii_data.json
+
+--machine_type n1-standard-2 \
+
+python main.py \
+--project di-gcp-351221 \
+--region us-east1 \
+--num_workers 1 \
+--max_num_workers 1 \
+--runner DataflowRunner \
+--temp_location gs://bkt-df-metadata-01/temp_location/ \
+--job_name etl-gcs-bq \
 --bucket bkt-df-metadata-01 \
 --envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
 --dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/pii_data.json
