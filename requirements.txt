@@ -1,0 +1,4 @@
+apache_beam[dataframe]
+apache-beam[gcp]
+google-cloud-storage
+google-cloud-bigquery
