@@ -1,0 +1,45 @@
+python main.py \
+--region <enter region of choice> \
+--runner DirectRunner \
+--project <project_id> \
+--temp_location <temporary gcs location for dataflow job> \
+--streaming \
+--job_name <job name of your choice> \
+--setup_file ./setup.py \
+--service_account_email <service account with appropriate roles> \
+--bucket <gcs bucket id to store images> \
+--schema_file <schema file of bigquery table in json format> \
+--dataset_id <BQ Dataset id> \
+--table_id <BQ Table id> \
+--pub_sub_subscription <Pub/Sub subsciption id> \
+--timestamp_attribute created_at \
+--keyword <keyword by which you have fetched details> \
+--custom_gcs_temp_location <Custom gcs location for BigQuery> \
+--gcs_url <GCS URL to store data> \
+--geo_keo_key <API Key obtained by signing up with geokeo>
+
+
+C&I
+python main.py \
+--runner DirectRunner \
+--job_name ETL-Pipeline-GCS-BQ
+--bucket ci-dev-configurations-asia-northeast1 \
+--envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
+--dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/pii_data.json
+
+D&I
+python main.py \
+--runner DirectRunner \
+--job_name ETL-Pipeline-GCS-BQ
+--bucket bkt-df-metadata-01 \
+--envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
+--dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/pii_data.json
+
+
+
+
+
+
+
+
+
