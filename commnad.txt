@@ -21,7 +21,6 @@ python main.py \
 
 C&I
 python main.py \
---region asia-northeast1 \
 --runner DirectRunner \
 --job_name ETL-Pipeline-GCS-BQ
 --bucket ci-dev-configurations-asia-northeast1 \
@@ -49,6 +48,7 @@ python main.py \
 --bucket bkt-df-metadata-01 \
 --envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
 --dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/pii_data.json
+--setup_file ./setup.py
 
 
 
