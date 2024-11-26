@@ -1,0 +1,77 @@
+{
+    "entityName": "customers_data",
+    "input_bucket": "ci-dev-configurations-asia-northeast1",
+    "input_folder": "input-data/csv-ingestion-pipeline/",
+    "dataset": "pii_etl_sink",
+    "table": "Customer_Data",
+    "file-header": ["CUST_ID","first_name","last_name","email","birthdate","sex","ssn","phone","maritalstatus","address","city","state","postcode","country"],
+      "schema": {
+        "fields": [
+          {
+            "name": "CUST_ID",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "First_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "Last_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "Email",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "BirthDate",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "Sex",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "SSN",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "MaritalStatus",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "Address",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "City",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "State",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "PostCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "Country",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+      ]
+      }
+    }
