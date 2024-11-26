@@ -38,19 +38,21 @@ python main.py \
 
 --machine_type n1-standard-2 \
 
+## Dataflow command
+
 python main.py \
---project di-gcp-351221 \
---region us-east1 \
+--project apc-serverless-anycloud \
+--region asia-northeast1 \
 --num_workers 1 \
 --max_num_workers 1 \
 --runner DataflowRunner \
---temp_location gs://bkt-df-metadata-01/temp_location/ \
+--temp_location gs://ci-dev-configurations-asia-northeast1/temp_location/ \
+--staging_location gs://ci-dev-configurations-asia-northeast1/staging_location/ \
 --job_name etl-gcs-bq \
---bucket bkt-df-metadata-01 \
+--bucket ci-dev-configurations-asia-northeast1 \
 --envConfigFolder configuration-store/csv-ingestion-pipeline/env.json \
 --dataConfigFolder configuration-store/csv-ingestion-pipeline/data-conf/ \
---setup_file setup.py
-
+--setup_file ./setup.py
 
 
 
