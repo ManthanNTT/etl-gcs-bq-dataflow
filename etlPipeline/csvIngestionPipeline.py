@@ -68,15 +68,6 @@ def run(argv=None, self=None):
     dataConfigList = bucket_object.list_blobs(prefix=envConfig["entityDataConf"], delimiter="/")
 
 
-    # print("Blobs:")
-    # for blob in dataConfigList:
-    #     if blob.name.endswith(".json"):
-    #         print(blob.name)
-    #
-    #         dataConfig = readConfig(known_args.BUCKET, blob.name)
-    #         print(dataConfig)
-
-
     with beam.Pipeline(argv=pipeline_args) as p:
 
         print("Blobs:")
@@ -84,7 +75,6 @@ def run(argv=None, self=None):
             if blob.name.endswith(".json"):
                 dataConfig = readConfig(known_args.BUCKET, blob.name)
                 print(dataConfig)
-
                 print(dataConfig["schema"])
 
                 schema = json.dumps(dataConfig["schema"])
@@ -94,16 +84,9 @@ def run(argv=None, self=None):
 
                 table_id = envConfig["projectId"] + ":" + dataConfig["dataset"] + "." + dataConfig["table"]
 
-                # tabel_spec = bigquery.TableReference(
-                #     projectId=envConfig["projectId"],
-                #     datasetId=dataConfig["dataset"],
-                #     tableId=dataConfig["table"]
-                # )
+                input_file_path = "gs://"+ dataConfig["input_bucket"] + "/" + dataConfig["input_folder"] + dataConfig["entityName"] + ".csv"
 
-                input_file_path = dataConfig["input_bucket"] + "/" + dataConfig["input_folder"] + dataConfig[
-                    "entityName"] + ".csv"
-
-                file_name = "gs://bkt-df-metadata-01/input-data/csv-ingestion-pipeline/output/" + dataConfig["entityName"]
+                output_file_path = "gs://"+ dataConfig["input_bucket"]+ "/" + dataConfig["input_folder"] + "output/" + dataConfig["entityName"]
 
                 csv_data = (
                     p
@@ -115,7 +98,7 @@ def run(argv=None, self=None):
 
                 validated_json = ( csv_data | f"ValidateCSV-{dataConfig["entityName"]}" >> beam.ParDo(ValidateAndConvertFn(dataConfig["file-header"])))
 
-                validated_json | f"WriteToGCS-{dataConfig["entityName"]}" >> beam.io.WriteToText(file_name, file_name_suffix=".json", shard_name_template='')#beam.io.WriteToText('gs://bkt-df-metadata-01/input-data/csv-ingestion-pipeline/output.json')
+                validated_json | f"WriteToGCS-{dataConfig["entityName"]}" >> beam.io.WriteToText(output_file_path, file_name_suffix=".json", shard_name_template='')#beam.io.WriteToText('gs://bkt-df-metadata-01/input-data/csv-ingestion-pipeline/output.json')
 
                 # validated_json | "jsonRecords" >> beam.ParDo(PrintRecords())
 

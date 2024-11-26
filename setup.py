@@ -1,7 +1,10 @@
 import setuptools
 
 REQUIRED_PACKAGES = [
-    "apache-beam[gcp]==2.42.0",
+    "apache_beam[dataframe]",
+    "apache-beam[gcp]",
+    "google-cloud-storage",
+    "google-cloud-bigquery"
 ]
 
 setuptools.setup(
